@@ -1,0 +1,15 @@
+APPEND Nombre Juan
+APPEND Apellido Mare
+HSET Alumnos Nombre Juan
+HGETALL Alumnos
+RPUSH lista Juan Fran
+LPUSH lista Tincho Facu
+LRANGE lista 0 4
+SADD Nombre hola
+SMEMBERS Nombre
+ZADD tutorials 1 redis
+ZADD tutorials 2 mongo
+ZADD tutorials 3 mysql
+ZRANGE tutorials 0 10
+ZRANGE tutorials 0 10 WITHSCORES
+
