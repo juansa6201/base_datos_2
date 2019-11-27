@@ -1,0 +1,42 @@
+1)db.movies.find({directors: "Auguste Lumière", directors: "Louis Lumière"})
+
+db.movies.find({directors: ["Auguste Lumière", "Louis Lumière"]},{directors: 1}).pretty()
+
+2)db.theaters.find({"location.address.city": "Bloomington"}).pretty()
+
+3)db.theaters.find({"location.address.city": "Bloomington"}, {_id: 1, theaterId: 1}).pretty()
+
+4)db.movies.aggregate([{$lookup:{from:"comments",localField: "_id",foreignField: "movie_id", as: "comments"}}, {$match:{"title": "Pauvre Pierrot"}}]).pretty()
+
+5)db.movies.find({year: {$gte: 1800, $lte: 1850}}).pretty()
+
+6)db.movies.find({},{title: 1, year: 1}).sort({year: 1}).limit(1)
+
+7)db.theaters.find({"location.address.city": "Bloomington"}).count()
+
+8)db.movies.aggregate([{$lookup:{from:"comments",localField: "_id",foreignField: "movie_id", as: "comments"}}, {$match:{"title": "Pauvre Pierrot"}}, {$count: "comments"}])
+
+9)db.movies.find({"num_mflix_comments":{$gte: 5}},{title: 1, "num_mflix_comments":1})
+
+10)db.theaters.find({"location.address.city": "Minessota"}).count()
+
+11)  db.comments.aggregate([
+    {
+      $group: {
+        _id: {
+          name: '$name'
+        },
+        count: {
+          $sum: 1,
+        },
+      }
+    },
+    { $sort : {count : -1} },
+    { $limit : 1 }
+  ])
+)
+
+12)db.movies.find({year: {$gte: 1850, $lt: 1900}}).count()
+13)db.movies.aggregate([{$lookup:{from:"comments",localField: "_id",foreignField: "movie_id", as: "comments"}}, {$match:{"title": "The Story of the Kelly Gang"}}, {$project:{_id: 0, names: '$comments.name'}}]).pretty()
+
+
